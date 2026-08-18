@@ -1,6 +1,6 @@
 {
   "name": "spriteloop-phaser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Phaser plugin for SpriteLoop .spla animation packages",
   "type": "module",
   "license": "MIT",

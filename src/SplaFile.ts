@@ -3,37 +3,15 @@ import { ensureSplaCache } from './SplaCache';
 import { createSplaCacheKey, parseSplaBytes } from './SplaPackage';
 import type { CachedSplaPackage } from './types';
 
-const File = Phaser.Loader.File;
-const CONST = Phaser.Loader;
-
 type SplaFileConfig = {
     key: string;
     url?: string;
     xhrSettings?: Phaser.Types.Loader.XHRSettingsObject;
 };
 
-interface SplaFileInstance extends Phaser.Loader.File {
-    key: string;
-    url: string;
-    xhrLoader: XMLHttpRequest;
-    loader: Phaser.Loader.LoaderPlugin;
-    onProcessComplete(): void;
-    onProcessError(): void;
-}
-
-type SkewableImage = Phaser.GameObjects.Image & {
-    setSkew?: (skewX: number, skewY: number) => void;
-};
-
-// Phaser.Class is declared globally in phaser.d.ts
-declare const Class: new (definition: object) => unknown;
-
-const SplaFile = new Class({
-
-    Extends: File,
-
-    initialize: function (
-        this: SplaFileInstance,
+export class SplaFile extends Phaser.Loader.File
+{
+    constructor(
         loader: Phaser.Loader.LoaderPlugin,
         key: string | SplaFileConfig,
         url?: string,
@@ -48,7 +26,7 @@ const SplaFile = new Class({
             xhrSettings = config.xhrSettings;
         }
 
-        File.call(this, loader, {
+        super(loader, {
             type: 'spla',
             cache: false,
             extension: 'spla',
@@ -57,16 +35,16 @@ const SplaFile = new Class({
             url,
             xhrSettings
         });
-    },
+    }
 
-    onProcess: function (this: SplaFileInstance)
+    onProcess(): void
     {
-        this.state = CONST.FILE_PROCESSING;
+        this.state = Phaser.Loader.FILE_PROCESSING;
 
         try
         {
-            const bytes = new Uint8Array(this.xhrLoader.response as ArrayBuffer);
-            const packageData = parseSplaBytes(bytes, this.url);
+            const bytes = new Uint8Array(this.xhrLoader!.response as ArrayBuffer);
+            const packageData = parseSplaBytes(bytes, String(this.url || this.key));
             const game = this.loader.scene.game;
             const cache = ensureSplaCache(game);
             const textureManager = this.loader.scene.textures;
@@ -153,13 +131,7 @@ const SplaFile = new Class({
             this.onProcessError();
         }
     }
-
-}) as new (
-    loader: Phaser.Loader.LoaderPlugin,
-    key: string | SplaFileConfig,
-    url?: string,
-    xhrSettings?: Phaser.Types.Loader.XHRSettingsObject
-) => SplaFileInstance;
+}
 
 export function splaFileCallback(
     this: Phaser.Loader.LoaderPlugin,
@@ -176,5 +148,3 @@ export function splaFileCallback(
 
     this.addFile(new SplaFile(this, key, url, xhrSettings));
 }
-
-export { SplaFile };

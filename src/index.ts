@@ -1,7 +1,6 @@
 import './types';
 
-export {
-    default as SplaPlugin,
+import SplaPlugin, {
     SplaObject,
     SplaPlayer,
     parseSplaBytes,
@@ -9,6 +8,17 @@ export {
     SPLA_EVENT,
     SplaEvents
 } from './SplaPlugin';
+
+export default SplaPlugin;
+export {
+    SplaPlugin,
+    SplaObject,
+    SplaPlayer,
+    parseSplaBytes,
+    ensureSplaCache,
+    SPLA_EVENT,
+    SplaEvents
+};
 export {
     canvasToLocal,
     createSplaCacheKey,
