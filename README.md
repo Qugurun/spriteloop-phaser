@@ -241,7 +241,7 @@ const centered = this.hero.getPartTransform("right_hand", { origin: "center" });
 console.log(pivot.position.x, pivot.position.y, pivot.rotation);
 ```
 
-Coordinates match the Defold plugin: local space centered on the package canvas,
+Coordinates: local space centered on the package canvas,
 with Y-up values in the returned `position`. Pass `{ origin: 'center' }` to get
 the visual center of the part image instead of its authored pivot.
 
