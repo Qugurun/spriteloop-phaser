@@ -1,6 +1,6 @@
 # SpriteLoop for Phaser
 
-[![npm version](https://img.shields.io/badge/npm-v0.1.0-4f7cff?style=for-the-badge)](#install)
+[![npm version](https://img.shields.io/badge/npm-v0.1.2-4f7cff?style=for-the-badge)](#install)
 
 > For SpriteLoop desktop app bugs and feature requests, use the
 > [SpriteLoop app issue tracker](https://github.com/Balkan-Ram-Games/spriteloop-app/issues).
