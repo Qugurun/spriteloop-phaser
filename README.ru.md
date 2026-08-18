@@ -241,7 +241,7 @@ const centered = this.hero.getPartTransform("right_hand", { origin: "center" });
 console.log(pivot.position.x, pivot.position.y, pivot.rotation);
 ```
 
-Координаты совпадают с Defold-плагином: локальное пространство с центром на
+Координаты: локальное пространство с центром на
 canvas пакета, Y вверх. Передайте `{ origin: 'center' }`, чтобы получить
 визуальный центр изображения части вместо authored pivot.
 
