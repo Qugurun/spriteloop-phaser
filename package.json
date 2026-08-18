@@ -1,0 +1,63 @@
+{
+  "name": "spriteloop-phaser",
+  "version": "0.1.1",
+  "description": "Phaser plugin for SpriteLoop .spla animation packages",
+  "type": "module",
+  "license": "MIT",
+  "author": "Balkan Ram Games",
+  "homepage": "https://github.com/Qugurun/spriteloop-phaser#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qugurun/spriteloop-phaser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Qugurun/spriteloop-phaser/issues"
+  },
+  "keywords": [
+    "phaser",
+    "phaser4",
+    "spriteloop",
+    "spla",
+    "animation",
+    "sprite",
+    "2d"
+  ],
+  "main": "./dist/spriteloop-phaser.cjs",
+  "module": "./dist/spriteloop-phaser.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/spriteloop-phaser.js",
+      "require": "./dist/spriteloop-phaser.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.ru.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "phaser": "^4.0.0"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  },
+  "devDependencies": {
+    "phaser": "4.2.1",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.1",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}
