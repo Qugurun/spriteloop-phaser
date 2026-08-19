@@ -18,6 +18,15 @@ export declare function canvasToLocal(x: number, y: number, canvasWidth: number,
 
 export declare function createSplaCacheKey(splaKey: string, assetPath: string): string;
 
+/**
+ * Enables matrix-based shear on a Phaser 4 Game Object (WebGL + Canvas).
+ * Call once per object; update `gameObject.skew.x` / `gameObject.skew.y` in radians afterward.
+ */
+export declare function enableSkew<T extends Phaser.GameObjects.GameObject & {
+    x: number;
+    y: number;
+}>(gameObject: T, skewX?: number, skewY?: number): T & SkewableGameObject;
+
 export declare function ensureSplaCache(game: Game): Cache_2.BaseCache;
 
 export declare function findAnimationIndex(packageData: SplaPackageData, animationIdOrName: string): number;
@@ -33,6 +42,8 @@ export declare function findStateIndex(packageData: SplaPackageData, stateIdKeyO
 export declare function findVariantIndex(packageData: SplaPackageData, partIndex: number, variantIdKeyOrName: string): number;
 
 export declare function getPartTransform(packageData: SplaPackageData, framePart: SplaFramePart | null, partIdKeyOrName: string, options?: SplaPartTransformOptions): SplaPartTransform | null;
+
+export declare function isSkewEnabled(gameObject: Phaser.GameObjects.GameObject): gameObject is SkewableGameObject;
 
 export declare interface ParsedSplaPackage extends SplaPackageData {
     path: string;
@@ -59,6 +70,13 @@ export declare function resolvePartFrameRender(packageData: SplaPackageData, par
 export declare function resolvePartImage(part: SplaPart, variant: SplaVariant | null): SplaResolvedPartRender;
 
 export declare function resolveSkinPartOverride(skin: SplaSkin | null, partId: string): SplaSkinPartOverride | null;
+
+export declare interface SkewableGameObject extends Phaser.GameObjects.GameObject {
+    skew: {
+        x: number;
+        y: number;
+    };
+}
 
 export declare const SPLA_EVENT = "spriteloop";
 

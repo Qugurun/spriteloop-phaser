@@ -33,4 +33,6 @@ export {
     resolveSkinPartOverride
 } from './SplaPackage';
 export { getPartTransform, findFramePartForPart } from './SplaPartTransform';
+export { enableSkew, isSkewEnabled } from './Skew';
+export type { SkewableGameObject } from './Skew';
 export type * from './types';

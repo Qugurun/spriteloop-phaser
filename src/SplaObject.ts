@@ -1,5 +1,6 @@
 import Phaser, { GameObjects, type Scene } from 'phaser';
 import { ensureSplaCache } from './SplaCache';
+import { enableSkew } from './Skew';
 import {
     applyImageTransform,
     findFramePartForPart,
@@ -79,13 +80,13 @@ export class SplaObject extends GameObjects.Container
                 continue;
             }
 
-            const primary = this.scene.add.image(0, 0, '__WHITE');
+            const primary = enableSkew(this.scene.add.image(0, 0, '__WHITE'));
             primary.setName(`${part.id}__primary`);
             primary.setVisible(false);
             this.add(primary);
             this.partImages.set(part.id, primary);
 
-            const mix = this.scene.add.image(0, 0, '__WHITE');
+            const mix = enableSkew(this.scene.add.image(0, 0, '__WHITE'));
             mix.setName(`${part.id}__mix`);
             mix.setVisible(false);
             this.add(mix);

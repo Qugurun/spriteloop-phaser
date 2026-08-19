@@ -1,4 +1,5 @@
 import { canvasToLocal, findPartIndex } from './SplaPackage';
+import { isSkewEnabled } from './Skew';
 import type { SplaFramePart, SplaPackageData, SplaPart, SplaPartTransform, SplaPartTransformOptions } from './types';
 
 const DEG_TO_RAD = Math.PI / 180;
@@ -106,13 +107,10 @@ export function applyImageTransform(
     image.setRotation((framePart.rotation + resolved.rotationDegrees) * DEG_TO_RAD);
     image.setScale(framePart.scaleX, framePart.scaleY);
 
-    const skewable = image as Phaser.GameObjects.Image & {
-        setSkew?: (skewX: number, skewY: number) => void;
-    };
-
-    if (skewable.setSkew && (framePart.skewX || framePart.skewY))
+    if (isSkewEnabled(image))
     {
-        skewable.setSkew(framePart.skewX * DEG_TO_RAD, framePart.skewY * DEG_TO_RAD);
+        image.skew.x = framePart.skewX * DEG_TO_RAD;
+        image.skew.y = framePart.skewY * DEG_TO_RAD;
     }
 
     const [ tr, tg, tb ] = framePart.tint;
